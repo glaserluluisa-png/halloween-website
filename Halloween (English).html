@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halloween</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Space+Grotesk:wght@400;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@400;600;800&family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;800&family=Great+Vibes&family=Pinyon+Script&family=Dancing+Script:wght@600;700&family=Lobster&family=Pacifico&family=Cinzel+Decorative:wght@700&family=UnifrakturCook:wght@700&family=Creepster&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0f0a1c; --surface:#1a1230; --line:#2e2250; --text:#f1ecfb; --muted:#a79cc4;
+  --violet:#8b5cf6; --pink:#f472b6; --amber:#fbab4a; --teal:#2dd4bf;--font:"Bricolage Grotesque",system-ui,sans-serif;--r:20px;--rp:999px;--gl:28%;--gl2:14%;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.55;
+  background-image:radial-gradient(60rem 30rem at 85% -10%,color-mix(in srgb,var(--violet) var(--gl),transparent),transparent 60%),radial-gradient(40rem 25rem at -10% 20%,color-mix(in srgb,var(--pink) var(--gl2),transparent),transparent 60%);
+  background-repeat:no-repeat}
+main{max-width:760px;margin:0 auto;padding:48px 20px 72px}
+h1{font-size:clamp(3.6rem,16vw,6.8rem);line-height:1.02;font-weight:800;letter-spacing:var(--hls,-.03em);font-family:var(--fh,var(--font));font-synthesis:none;padding-bottom:.12em;margin:0 0 14px;
+  background:linear-gradient(100deg,var(--amber),var(--pink) 55%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.1rem;max-width:34em;margin:0 0 40px}
+section{margin-bottom:56px}
+h2{font-size:clamp(1.9rem,6vw,2.4rem);font-weight:600;letter-spacing:var(--hls,-.01em);font-family:var(--fh,var(--font));font-synthesis:none;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font:inherit;font-size:.92rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:var(--rp);padding:7px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{color:var(--text);border-color:var(--violet);background:color-mix(in srgb,var(--violet) 20%,transparent)}
+.btn{font:inherit;font-weight:600;font-size:1.05rem;color:var(--bg);background:linear-gradient(100deg,var(--amber),var(--pink));border:0;border-radius:calc(var(--r)*.7);padding:14px 26px;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.alt{background:linear-gradient(100deg,var(--teal),var(--violet));color:var(--bg)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;margin-top:22px}
+.act{display:flex;gap:18px;align-items:flex-start}
+.emoji{font-size:3rem;line-height:1}
+.act h3{margin:0 0 6px;font-size:1.5rem;letter-spacing:-.01em}
+.act p{margin:0;color:var(--muted);max-width:34em}
+.tag{display:inline-block;font-size:.82rem;color:var(--pink);border:1px solid color-mix(in srgb,var(--pink) 40%,transparent);border-radius:var(--rp);padding:2px 10px;margin-bottom:10px}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{from{transform:scale(.96);opacity:.3}to{transform:none;opacity:1}}
+.movies{display:grid;gap:14px;margin-top:22px}
+.movie{display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c,var(--violet));border-radius:calc(var(--r)*.8);padding:18px 20px}
+.movie h3{margin:0;font-size:1.15rem}
+.movie small{color:var(--muted)}
+.movie a{flex:none;color:var(--teal);font-weight:600;text-decoration:none;border:1px solid color-mix(in srgb,var(--teal) 40%,transparent);border-radius:10px;padding:8px 12px;font-size:.92rem}
+.movie a:hover{background:color-mix(in srgb,var(--teal) 12%,transparent)}
+.empty{color:var(--muted);border:1px dashed var(--line);border-radius:var(--r);padding:26px;margin-top:22px}
+footer{color:var(--muted);font-size:.9rem}
+.mk{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center}
+.mk[hidden]{display:none}
+#face{width:100%;max-width:200px;height:auto}
+.mkRow{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.mkRow:last-child{border-bottom:0}
+.sw{flex:none;width:18px;height:18px;border-radius:50%;margin-top:4px;border:2px solid rgba(255,255,255,.25)}
+.mkRow b{display:block;font-weight:600}
+.mkRow span{color:var(--muted);font-size:.92rem}
+.mkRow button{flex:none;margin-left:auto;font:inherit;color:var(--teal);background:transparent;border:1px solid color-mix(in srgb,var(--teal) 40%,transparent);border-radius:10px;padding:4px 10px;cursor:pointer}
+@media (max-width:600px){.mk{grid-template-columns:1fr;justify-items:center}.mkList{width:100%}}
+.act .save{margin-top:16px}
+.save{font:inherit;font-size:.92rem;color:var(--pink);background:transparent;border:1px solid color-mix(in srgb,var(--pink) 45%,transparent);border-radius:10px;padding:6px 12px;cursor:pointer}
+.save[aria-pressed="true"]{background:color-mix(in srgb,var(--pink) 18%,transparent);color:var(--text)}
+.mvAct{display:flex;flex-direction:column;gap:8px;align-items:stretch;text-align:center}
+.sv{margin-top:6px;font-size:.85rem;color:var(--muted)}
+.badge{display:inline-block;background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal);border-radius:var(--rp);padding:2px 10px;margin-right:6px;font-weight:600}
+.cnt{font-size:1rem;color:var(--muted);font-weight:400}
+.li{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r)*.7);padding:12px 16px;margin-bottom:10px}
+.li b{font-weight:600}.li small{display:block;color:var(--muted)}
+.li button{margin-left:auto;font:inherit;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:10px;padding:5px 11px;cursor:pointer}
+.li button:hover{color:var(--text);border-color:var(--pink)}
+.clr{font:inherit;color:var(--muted);background:transparent;border:0;text-decoration:underline;cursor:pointer;padding:6px 0}
+.pal{margin-bottom:44px}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:-1px;background:linear-gradient(135deg,var(--d1),var(--d2))}
+.mkTitle{margin:0 0 6px;font-size:1.8rem;letter-spacing:var(--hls,-.01em);font-family:var(--fh,var(--font));font-synthesis:none}
+.btn.sm{font-size:.95rem;padding:9px 16px}.dsbar{margin-bottom:44px}#ds{margin:-24px 0 44px}.lab{margin:14px 0 8px;color:var(--muted);font-size:.9rem}.lab:first-child{margin-top:0}#ds .chips{margin-bottom:0}#mkSave{margin-top:14px}
+.duo{display:flex;gap:12px;flex-wrap:wrap}
+.big{font-size:1.35rem;margin:0;line-height:1.35}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.die{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r)*.7);padding:10px 14px;margin-bottom:8px}
+.die button{flex:none;font:inherit;color:var(--teal);background:transparent;border:1px solid color-mix(in srgb,var(--teal) 40%,transparent);border-radius:10px;padding:3px 9px;cursor:pointer}
+.ck{display:block;padding:5px 0;cursor:pointer}.ck input{accent-color:var(--pink)}
+#shop{margin-top:16px}
+@media (max-width:600px){.dg{grid-template-columns:1fr}}
+@media (max-width:480px){.act{flex-direction:column;gap:10px}.movie{flex-direction:column;align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Halloween</h1>
+  <p class="lead">No plans for tonight? Roll an activity and pick a movie to go with it.</p>
+
+  <div class="dsbar"><button class="btn alt sm" id="dsBtn" aria-expanded="false" aria-controls="ds">🎨 Design</button></div>
+  <div class="card" id="ds" hidden></div>
+
+  <section aria-labelledby="t1">
+    <h2 id="t1">Your activity</h2>
+    <p class="sub">Pick a mood or leave it to chance.</p>
+    <div class="chips" id="chips" role="group" aria-label="Mood"></div>
+    <button class="btn" id="rollAct">Roll an activity</button>
+    <div id="actOut" aria-live="polite"><div class="empty">Nothing rolled yet. Tap the button.</div></div>
+  </section>
+
+  <section aria-labelledby="t2">
+    <h2 id="t2">Your movie</h2>
+    <p class="sub">3 picks with runtime and age rating. The link shows where to watch.</p>
+    <button class="btn alt" id="rollMov">Suggest movies</button>
+    <div class="movies" id="movOut" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="t5">
+    <h2 id="t5">Truth or Dare</h2>
+    <p class="sub">Choose, then get your question or task.</p>
+    <div class="duo"><button class="btn" id="bW">Truth</button><button class="btn alt" id="bP">Dare</button></div>
+    <div id="tdOut" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="t6">
+    <h2 id="t6">Spooky story</h2>
+    <p class="sub">9 words, one story. Tap ↻ to swap single ones.</p>
+    <button class="btn alt" id="rollSt">Roll the words</button>
+    <div id="stOut" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="t3">
+    <h2 id="t3">Your Halloween makeup</h2>
+    <p class="sub">Pick styles, mix them, reroll single parts.</p>
+    <div class="chips" id="styleChips" role="group" aria-label="Styles"></div>
+    <button class="btn" id="rollMk">Mix makeup</button>
+    <div class="card" id="mkCard" hidden>
+      <h3 class="mkTitle" id="mkTitle"></h3>
+      <div class="mkList" id="mkList"></div>
+      <div id="mkSave"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tl">
+    <h2 id="tl">Your list <span id="cnt" class="cnt"></span></h2>
+    <p class="sub">Tap “Save” on activities, movies and looks. The list stays in this browser.</p>
+    <div id="saved"></div>
+    <p style="margin:18px 0 0"><button class="btn alt sm" id="shopBtn" aria-expanded="false" aria-controls="shop">🛒 Shopping list</button></p>
+    <div class="card" id="shop" hidden></div>
+  </section>
+
+  <section aria-labelledby="t4">
+    <h2 id="t4">Duo costume</h2>
+    <p class="sub">A random pair for the two of you.</p>
+    <button class="btn" id="rollKo">Roll a costume</button>
+    <div id="koOut" aria-live="polite"></div>
+  </section>
+
+  <footer>Have fun and happy haunting!</footer>
+</main>
+
+<script>
+const ACTS=[
+["🍪","Marshmallow Cookies","Bake cookies, press a marshmallow in after 8 min.","Baking"],
+["🕸️","Spiderweb Brownies","Draw icing circles, drag a toothpick into a web.","Baking"],
+["🍏","Caramel Apples","Dip apples in caramel, roll in sprinkles.","Baking"],
+["🔥","Oven S’mores","Cookie, chocolate, marshmallow, 3 min under the grill.","Baking"],
+["🧁","Ghost Cupcakes","White frosting, chocolate eyes.","Baking"],
+["🍩","Monster Donuts","Donuts with icing, sprinkles and faces.","Baking"],
+["🥧","Mini Apple Pockets","Puff pastry, apple, cinnamon, spider pattern.","Baking"],
+["🍕","Monster Pizza","Olive eyes, pepper mouth.","Baking"],
+["🌭","Mummy Hot Dogs","Wrap in puff pastry, add mustard eyes.","Baking"],
+["⚰️","Graveyard Cups","Pudding, Oreo dirt, gummy worms, cookie tombstones.","Baking"],
+["🕷️","Chocolate Spiders","Pipe chocolate, add licorice legs.","Baking"],
+["🖐️","Witch Finger Cookies","Shortbread fingers with almond nails.","Baking"],
+["☕","Pumpkin Spice Latte","Milk, cinnamon, nutmeg, vanilla, coffee.","Drinks"],
+["🍎","Apple Cinnamon Punch","Apple juice, cinnamon, cloves, orange, simmer.","Drinks"],
+["🥛","Spiderweb Milkshake","Vanilla ice cream, milk, chocolate sauce web.","Drinks"],
+["🧃","Blood Orange Potion","Blood orange, tonic, splash of grenadine.","Drinks"],
+["🍵","Chai Latte","Tea, cinnamon, cardamom, ginger, milk, honey.","Drinks"],
+["🍫","Hot Chocolate Bar","Toppings: marshmallows, caramel, cream.","Drinks"],
+["🧪","Witch’s Brew","Soda and juice, gummy worms in ice cubes.","Drinks"],
+["🍓","Vampire Smoothie","Berries, banana, yogurt, blend blood red.","Drinks"],
+["🥤","Mocktail Duel","Each mixes a drink, the other judges blind.","Drinks"],
+["🍯","Golden Milk","Warm milk, turmeric, cinnamon, honey.","Drinks"],
+["🎃","Carve a Pumpkin","Trace a stencil, poke through, carve.","Creative"],
+["🎨","Paint Pumpkins","Decorate mini pumpkins with acrylics.","Creative"],
+["💅","Halloween Nails","Black polish plus webs or blood drops.","Creative"],
+["🧵","Thrift Store Costume","10 € budget, build a duo look.","Creative"],
+["📸","Red Light Photos","Red cellophane over the phone flashlight.","Creative"],
+["🎧","Spooky Playlist","8 songs each, guess who picked what.","Creative"],
+["🕯️","Haunted Decor","Fairy lights, paper bats, window figures.","Creative"],
+["📔","Memory Book","Glue photos and notes into a booklet.","Creative"],
+["🧶","Friendship Bracelets","Knot in black, orange, purple.","Creative"],
+["🏷️","Potion Labels","Fill jars with your own labels.","Creative"],
+["🎯","Horror Movie Bingo","Tick off clichés, first row wins.","Spooky"],
+["🗝️","Mini Escape Room","Riddles and codes in three rooms.","Spooky"],
+["🎭","Werewolf","With handmade role cards.","Spooky"],
+["📖","Read Creepypasta","Take turns reading by candlelight.","Spooky"],
+["🔍","Mystery Night","Print a murder case and solve it.","Spooky"],
+["👻","Ghost Photos","Make ghosts with a double-exposure app.","Spooky"],
+["🛋️","Blanket Fort","Blankets, pillows, fairy lights, snacks.","Cozy"],
+["🕯️","Pour Scented Candles","Melt wax, add scent, pour into jars.","Cozy"],
+["🧖‍♀️","Pamper Night","Face mask, tea, nail polish.","Cozy"],
+["🍬","Candy Swap","10 kinds each, trade at fixed rates.","Cozy"],
+["🍿","Popcorn Bar","Caramel, cinnamon, chocolate: compare.","Cozy"],
+["🥣","Pumpkin Soup","Pumpkin, coconut milk, bread to dip.","Cozy"],
+["🧣","Pajama Marathon","Two movies, snacks, never leave bed.","Cozy"],
+["🎮","Spooky Gaming","Co-op horror game or Mario Party.","Cozy"],
+["🎲","Board Games","Clue, Mysterium or Uno with forfeits.","Cozy"],
+["🚶‍♀️","Trick or Treat","Costume on, ring bells, count loot.","Outdoors"],
+["🔦","Dark Scavenger Hunt","Hide notes, search with a flashlight.","Outdoors"],
+["🍂","Autumn Walk","Make lanterns, walk through leaves.","Outdoors"],
+["🔥","Bonfire","Grill marshmallows and twist bread.","Outdoors"],
+["🌕","Moon Photos","Shoot the moon and silhouettes.","Outdoors"]
+].map(([e,t,d,c])=>({e,t,d,c}));
+const MOVIES=[
+["Hocus Pocus",1993,"Funny",96,6,1],["Coraline",2009,"Scary",100,6],["Scream",1996,"Scary",111,16],
+["Practical Magic",1998,"Cozy",104,12],["Beetlejuice",1988,"Funny",92,12],["The Nightmare Before Christmas",1993,"Cozy",76,6,1],
+["Ghostbusters",1984,"Funny",105,12],["Halloweentown",1998,"Cozy",84,6,1],["Edward Scissorhands",1990,"Cozy",105,12],
+["Get Out",2017,"Scary",104,16],["A Quiet Place",2018,"Scary",90,16],["Happy Death Day",2017,"Funny",96,16],
+["Ready or Not",2019,"Funny",95,16],["Zombieland",2009,"Funny",88,16],["Shaun of the Dead",2004,"Funny",99,16],
+["Fear Street: 1994",2021,"Scary",107,16],["The Addams Family",1991,"Funny",99,12],["Coco",2017,"Cozy",105,6,1],
+["The Orphanage",2007,"Scary",105,16],["Knives Out",2019,"Cozy",130,12],
+["Hotel Transylvania",2012,"Funny",91,6],["Casper",1995,"Cozy",100,6],["Frankenweenie",2012,"Cozy",87,12,1],
+["ParaNorman",2012,"Funny",92,12],["Monster House",2006,"Funny",91,6],["The Witches",2020,"Cozy",106,12],
+["Insidious",2010,"Scary",103,16],["The Conjuring",2013,"Scary",112,16],["It",2017,"Scary",135,16],
+["Sleepy Hollow",1999,"Scary",105,16],["Beetlejuice Beetlejuice",2024,"Funny",104,12],["Corpse Bride",2005,"Cozy",77,12],
+["Twilight",2008,"Cozy",122,12],["Jennifer’s Body",2009,"Funny",102,16],["Haunted Mansion",2023,"Funny",123,12,1],
+["Goosebumps",2015,"Funny",103,12],["The Craft",1996,"Scary",101,16],["Smile",2022,"Scary",115,16],
+["Talk to Me",2022,"Scary",95,16],["The Lost Boys",1987,"Scary",97,16]
+].map(a=>({t:a[0],y:a[1],g:a[2],l:a[3],f:a[4],s:a[5]?["Disney+"]:[]}));
+const COL={Funny:"var(--amber)",Scary:"var(--pink)",Cozy:"var(--teal)"};
+const $=id=>document.getElementById(id);
+let mood="All",lastAct=-1;
+
+const moods=["All","Baking","Drinks","Creative","Spooky","Cozy","Outdoors"];
+moods.forEach(m=>{
+  const b=document.createElement("button");
+  b.className="chip";b.textContent=m;b.setAttribute("aria-pressed",m===mood);
+  b.onclick=()=>{mood=m;[...$("chips").children].forEach(c=>c.setAttribute("aria-pressed",c.textContent===m))};
+  $("chips").appendChild(b);
+});
+
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+
+$("rollAct").onclick=()=>{
+  const pool=ACTS.filter(a=>mood==="All"||a.c===mood);
+  let a;
+  do{a=pick(pool)}while(pool.length>1&&ACTS.indexOf(a)===lastAct);
+  lastAct=ACTS.indexOf(a);
+  const out=$("actOut");
+  out.innerHTML="";
+  const card=document.createElement("div");
+  card.className="card act pop";
+  const e=document.createElement("div");e.className="emoji";e.textContent=a.e;
+  const box=document.createElement("div");
+  box.innerHTML='<span class="tag"></span><h3></h3><p></p>';
+  box.querySelector(".tag").textContent=a.c;
+  box.querySelector("h3").textContent=a.t;
+  box.querySelector("p").textContent=a.d;
+  box.appendChild(saveBtn("akt",a.t,a.e));card.append(e,box);out.appendChild(card);
+};
+
+$("rollMov").onclick=()=>{
+  const bag=[...MOVIES],chosen=[];
+  while(chosen.length<3){chosen.push(bag.splice(Math.floor(Math.random()*bag.length),1)[0])}
+  const out=$("movOut");out.innerHTML="";
+  chosen.forEach(m=>{
+    const el=document.createElement("div");el.className="movie pop";el.style.setProperty("--c",COL[m.g]);
+    const info=document.createElement("div");
+    const h=document.createElement("h3");h.textContent=m.t;
+    const s=document.createElement("small");s.textContent=m.g+" · "+m.y+" · "+m.l+" min · FSK "+m.f+" (DE)";
+    const sv=document.createElement("div");sv.className="sv";
+    if(m.s.length){m.s.forEach(n=>{const bd=document.createElement("span");bd.className="badge";bd.textContent=n;sv.appendChild(bd)})}
+    else{sv.textContent="Streaming: check the link"}
+    info.append(h,s,sv);
+    const a=document.createElement("a");
+    a.href="https://www.justwatch.com/uk/search?q="+encodeURIComponent(m.t);
+    a.target="_blank";a.rel="noopener noreferrer";a.textContent="Where to watch";
+    const ac=document.createElement("div");ac.className="mvAct";ac.append(a,saveBtn("film",m.t,"🎬"));el.append(info,ac);out.appendChild(el);
+  });
+};
+
+const STY={
+"Gothic":{eyes:["Black smoky eye, kohl on the waterline","Sharp black winged liner"],lips:["Dark red lips, crisp edge","Black-purple matte lips"],cheeks:["Pale complexion, cool powder","Contour under cheekbones, no blush"],extra:["Silver rhinestones at the corner","Thin black line under the eye"]},
+"Douyin":{eyes:["Rose-gold shimmer inner lid, lower lashes","Pink shadow with liner pulled down"],lips:["Cherry gradient lips","Glossy rosé tint"],cheeks:["Blush high up to the nose","Highlighter on nose and cheeks"],extra:["Light stripe under the eye (aegyo sal)","Freckles with brown pencil"]},
+"Vampire":{eyes:["Blood-red shadow around the eyes","Burgundy smoky, dark inner corner"],lips:["Deep red lips, blood drop at the corner","Matte burgundy lips"],cheeks:["Chalk-pale skin","Hollow cheeks with contour"],extra:["Red tear streak on the cheek","Two bite marks on the neck"]},
+"Y2K":{eyes:["Icy blue glitter shadow","Metallic pink with thin liner"],lips:["Holo gloss over pink liner","Purple glitter gloss"],cheeks:["Blush across the nose","Shimmery highlighter"],extra:["Rhinestone line above the brow","Butterfly sticker at the corner"]},
+"Grunge":{eyes:["Smudged black liner, after-party look","Dark brown rings around the eyes"],lips:["Dark red dabbed and blurred","Matte nude with dark edge"],cheeks:["Red blush over the nose like sunburn","Smoky contour at the temples"],extra:["Messy, thick brows","Tiny black dot tattoo on the cheek"]},
+"Fairy":{eyes:["Light green shimmer to the brow","Lavender gradient with glitter"],lips:["Pastel pink tint","Peach gloss"],cheeks:["Pearl highlighter on cheeks and forehead","Soft purple-pink blush"],extra:["Tiny flowers or gems at the temples","Pointy elf ears"]},
+"Latina":{eyes:["Warm bronze shadow, wing, lots of mascara","Gold glitter lid, strong brows"],lips:["Brown liner with nude gloss","Bold red with liner"],cheeks:["Bronzer on cheeks and forehead, highlighter on top","Warm peach blush"],extra:["High, full brows","Long separated lashes"]},
+"70s":{eyes:["Brown shadow to the brow, brown liner below","Golden shimmer with turquoise accent"],lips:["Coral gloss","Glossy brown-red"],cheeks:["Peach blush up to the temples","Bronzer on cheekbones"],extra:["Thin plucked brows","Glitter dots at the corners"]},
+"2016":{eyes:["Sharp wing with cut crease","Matte brown smoky, glitter center"],lips:["Matte nude with darker liner","Mauve lips"],cheeks:["Heavy contour, baked highlighter","Strobing on cheekbones"],extra:["Thick, sharp brows","Long false lashes"]},
+"90s":{eyes:["Brown shadow with thin liner","Brown kohl on the lash line, little mascara"],lips:["Dark brown liner with matte mauve","Glossy berry"],cheeks:["Almost no blush, matte skin","Light bronze glow"],extra:["Very thin brows","Glitter gel on cheeks"]},
+"Clean Girl":{eyes:["Just mascara and brushed brows","Soft beige lid, curled lashes"],lips:["Clear gloss over lip balm","Rosé balm"],cheeks:["Creamy blush","Light highlighter"],extra:["Fluffy brushed brows","Smooth dewy skin"]},
+"Cyber":{eyes:["Neon blue graphic liner","Silver chrome shadow"],lips:["Silver chrome lips","Black gloss"],cheeks:["Pale skin with neon blush","Holographic highlighter"],extra:["Rhinestone chain jewelry","UV lines under the eyes"]},
+"Zombie":{eyes:["Gray and greenish shadow, deep eye bags","Sunken black-gray eye sockets"],lips:["Ash-colored lips","Cracked lips, gray lipstick"],cheeks:["Greenish pallor with contour","Gray skin, hollow cheeks"],extra:["Painted stitches on cheek or forehead","Dirt and fake blood on the chin"]},
+"Emo":{eyes:["Thick black kohl all around","Smudged liner with a wing"],lips:["Pale lips","Dark berry"],cheeks:["Very pale skin","Light pink blush on the nose"],extra:["Tiny hearts or stars under the eye","Liner dots as piercing look"]},
+"Witch":{eyes:["Violet-emerald gradient, glitter","Dark green lid, black liner"],lips:["Dark violet","Black cherry"],cheeks:["Chalk-white skin","Dark purple blush at the temples"],extra:["Eyeliner crescent moon or stars","Glitter dabs on cheekbones"]},
+"E-Girl":{eyes:["Pink liner with tiny hearts","Thin wing, glitter in the inner corner"],lips:["Pink tint with glitter","Smudged cherry red"],cheeks:["Blush across the nose","Pink blush with highlighter"],extra:["Hearts or stars under the eyes","Drawn-on freckles"]},
+"K-Pop":{eyes:["Glitter shimmer, lower lashes","Peach lid with fine liner"],lips:["Red gradient lips","Glossy rosé"],cheeks:["Peach blush high on the cheeks","Dewy highlighter"],extra:["Gems at the eye corner","Straight, soft brows"]},
+"Soft Glam":{eyes:["Warm browns with a soft wing","Champagne lid with mascara"],lips:["Nude rosé with gloss","Caramel liner"],cheeks:["Bronzer and rosé blush","Highlighter on cheeks"],extra:["Fluffy brows","Long lashes"]},
+"Pastel Goth":{eyes:["Lilac and mint smudged, black liner","Pink lid with black wing"],lips:["Matte lavender","Pastel pink with black edge"],cheeks:["Pale skin with a pink hint","Lavender blush"],extra:["Mini stars and moons","Black stars next to the eye"]},
+"Cottagecore":{eyes:["Soft beige lid, light mascara","Delicate rosé lid"],lips:["Pink balm","Rosewood tone"],cheeks:["Natural blush","Lots of freckles"],extra:["Tiny flowers at the eye","Flowers in the hair"]},
+"Doll":{eyes:["Pink lid, liner and lots of lashes","Painted lower lashes"],lips:["Cherry heart lips","Pink gloss, small shape"],cheeks:["Round red blush circles","Pink blush under the eyes"],extra:["Very pale skin","Glitter on the lid"]},
+"Cat":{eyes:["Sharp, long winged liner","Golden shimmer with wing"],lips:["Dark pink with liner","Matte mauve"],cheeks:["Eyeliner whiskers","Pink blush"],extra:["Black nose tip","Headband with ears"]},
+"Skeleton":{eyes:["Round black eye sockets","White lid with black rings"],lips:["Painted teeth","Black lips with white stitches"],cheeks:["White face paint","Black hollow cheeks"],extra:["Ribs on the neck","Cracks drawn on the face"]}
+};
+const PARTS=[["eyes","Eyes"],["lips","Lips"],["cheeks","Cheeks & skin"],["extra","Detail"]];
+const pool=new Set();let mix=[],cur={};
+Object.keys(STY).forEach(n=>{
+  const b=document.createElement("button");b.className="chip";b.textContent=n;b.setAttribute("aria-pressed","false");
+  b.onclick=()=>{pool.has(n)?pool.delete(n):pool.add(n);b.setAttribute("aria-pressed",pool.has(n))};
+  $("styleChips").appendChild(b);
+});
+function rollPart(k){const s=pick(mix);const o=pick(STY[s][k]);cur[k]={t:Array.isArray(o)?o[0]:o,s}}
+function renderMk(){
+  $("mkTitle").textContent=mix.join(" × ");
+  const list=$("mkList");list.innerHTML="";
+  PARTS.forEach(([k,lab])=>{
+    const r=document.createElement("div");r.className="mkRow pop";
+    r.innerHTML='<div><b></b><span></span></div><button aria-label="Reroll">↻</button>';
+    r.querySelector("b").textContent=lab+": "+cur[k].t;
+    r.querySelector("span").textContent="From style "+cur[k].s;
+    r.querySelector("button").onclick=()=>{rollPart(k);renderMk()};
+    list.appendChild(r);
+  });
+  const m=$("mkSave");m.innerHTML="";
+  m.appendChild(saveBtn("look",mix.join(" × "),"💄",PARTS.map(([k,l])=>l+": "+cur[k].t).join(" · ")));
+}
+$("rollMk").onclick=()=>{
+  const names=pool.size?[...pool]:Object.keys(STY);
+  mix=names.sort(()=>Math.random()-.5).slice(0,2);
+  PARTS.forEach(([k])=>rollPart(k));
+  $("mkCard").hidden=false;renderMk();
+};
+
+let saved=[];
+try{const r=JSON.parse(localStorage.getItem("hbff")||"[]");if(Array.isArray(r))saved=r}catch(e){}
+function persist(){try{localStorage.setItem("hbff",JSON.stringify(saved))}catch(e){}}
+const same=(x,k,t,d)=>x.k===k&&x.t===t&&(x.d||"")===(d||"");
+function saveBtn(k,t,e,d){
+  const b=document.createElement("button");b.className="save";
+  b.upd=()=>{const on=saved.some(x=>same(x,k,t,d));b.textContent=on?"✓ Saved":"♡ Save";b.setAttribute("aria-pressed",on)};
+  b.upd();
+  b.onclick=()=>{if(saved.some(x=>same(x,k,t,d)))saved=saved.filter(x=>!same(x,k,t,d));else saved.push({k,t,e,d});persist();renderList()};
+  return b;
+}
+function renderList(){
+  const box=$("saved");box.innerHTML="";
+  $("cnt").textContent=saved.length?"("+saved.length+")":"";
+  if(!saved.length){box.innerHTML='<div class="empty">Nothing saved yet.</div>'}
+  else{
+    saved.forEach((x,i)=>{
+      const r=document.createElement("div");r.className="li";
+      r.innerHTML='<span class="emoji" style="font-size:1.8rem"></span><div><b></b><small></small></div><button>Remove</button>';
+      r.querySelector(".emoji").textContent=x.e;
+      r.querySelector("b").textContent=x.t;
+      r.querySelector("small").textContent=({film:"Movie",look:"Makeup",kos:"Costume",akt:"Activity"})[x.k]+(x.d?" · "+x.d:"");
+      const bt=r.querySelector("button");bt.setAttribute("aria-label",x.t+" – remove");
+      bt.onclick=()=>{saved.splice(i,1);persist();renderList()};
+      box.appendChild(r);
+    });
+    const c=document.createElement("button");c.className="clr";c.textContent="Clear list";
+    c.onclick=()=>{saved=[];persist();renderList()};box.appendChild(c);
+  }
+  document.querySelectorAll(".save").forEach(b=>b.upd&&b.upd());
+  renderShop();
+}
+renderList();
+
+const PAL=[
+ ["aubergine","Aubergine (current)","#0f0a1c","#1a1230","#2e2250","#f1ecfb","#a79cc4","#8b5cf6","#f472b6","#fbab4a","#2dd4bf"],
+ ["blutmond","Blood Moon","#12070a","#1f0d12","#3d1620","#f7e9ea","#b99a9e","#c4163f","#ff5d73","#ff9f5a","#f2b8a2"],
+ ["hexenwald","Witch Forest","#08120e","#0f1f18","#1d3a2c","#e8f5ee","#94b5a4","#3ecf8e","#b6e35a","#f4c95d","#5fd1c4"],
+ ["mitternacht","Midnight Blue","#070b18","#0e1530","#1c2850","#e8eeff","#94a3c9","#5b8cff","#9f7aea","#7dd3fc","#38e0c8"],
+ ["kuerbiskaffee","Pumpkin Coffee","#140d09","#21160f","#3b2718","#f7ece1","#c0a48d","#e07a3a","#f2a65a","#f5cf8a","#c9a27a"],
+ ["nebel","Fog Gray","#0c0d12","#16181f","#2a2d38","#eceef4","#9aa0b2","#8e9aaf","#c0a8d8","#d9c8a0","#8fd3d6"],
+ ["beerenwein","Berry Wine","#14070f","#230f1c","#43203a","#fbe8f3","#c39ab4","#c026d3","#ff6fae","#ffb86b","#f0abfc"],
+ ["zuckerwatte","Cotton Candy Night","#0e0b17","#191427","#302848","#f3eefc","#a99fc4","#b79cff","#ffa6d1","#ffd7a0","#8ff0e0"],
+ ["neon","Neon Ghosts","#08060f","#120d22","#261a45","#f0ecff","#9a8fc0","#a855f7","#ff2e9a","#c6ff3d","#19f0ff"],
+ ["tannengold","Pine & Gold","#0a100d","#121c17","#22362c","#f0f4e8","#9db5a4","#c9a227","#e8c468","#f3dc9a","#7fb89a"]
+];
+const PK=["bg","surface","line","text","muted","violet","pink","amber","teal"];
+const FONTS=[["bric","Bricolage","'Bricolage Grotesque',system-ui,sans-serif"],["space","Space Grotesk","'Space Grotesk',system-ui,sans-serif"],["fraun","Fraunces","Fraunces,Georgia,serif"],["outfit","Outfit","Outfit,system-ui,sans-serif"],["mono","Space Mono","'Space Mono',ui-monospace,monospace"],["nunito","Nunito","Nunito,system-ui,sans-serif"]];
+const RADS=[["std","Default","20px","999px"],["rund","Round","32px","999px"],["eck","Sharp","4px","6px"]];
+const BGS=[["glow","Glow","28%","14%"],["aus","Off","0%","0%"],["stark","Strong","55%","32%"]];
+const HF=[["gleich","Same as text","var(--font)","-.02em"],["vibes","Great Vibes","'Great Vibes',cursive","0"],["pinyon","Pinyon Script","'Pinyon Script',cursive","0"],["dancing","Dancing Script","'Dancing Script',cursive","0"],["lobster","Lobster","Lobster,cursive","0"],["pacifico","Pacifico","Pacifico,cursive","0"],["cinzel","Cinzel Decorative","'Cinzel Decorative',serif","0"],["fraktur","Fraktur","UnifrakturCook,serif","0"],["creepster","Creepster","Creepster,system-ui",".02em"]];
+const G=[["pal","Colors",PAL],["font","Text font",FONTS],["hf","Title font",HF],["rad","Corners",RADS],["bg","Background",BGS]];
+const SET={hf:(o,r)=>{r.setProperty("--fh",o[2]);r.setProperty("--hls",o[3])},pal:(o,r)=>PK.forEach((k,i)=>r.setProperty("--"+k,o[i+2])),font:(o,r)=>r.setProperty("--font",o[2]),rad:(o,r)=>{r.setProperty("--r",o[2]);r.setProperty("--rp",o[3])},bg:(o,r)=>{r.setProperty("--gl",o[2]);r.setProperty("--gl2",o[3])}};
+let D={};try{D=JSON.parse(localStorage.getItem("hbffd")||"{}")||{}}catch(e){}
+function applyDs(){
+  const r=document.documentElement.style;
+  G.forEach(([k,,L])=>{const o=L.find(x=>x[0]===D[k])||L[0];SET[k](o,r)});
+  document.querySelectorAll("#ds .chip").forEach(b=>{const L=G.find(g=>g[0]===b.dataset.g)[2];b.setAttribute("aria-pressed",(L.find(x=>x[0]===D[b.dataset.g])||L[0])[0]===b.dataset.id)});
+}
+G.forEach(([k,lab,L])=>{
+  const t=document.createElement("p");t.className="lab";t.textContent=lab;
+  const row=document.createElement("div");row.className="chips";
+  L.forEach(o=>{
+    const b=document.createElement("button");b.className="chip";b.dataset.g=k;b.dataset.id=o[0];
+    if(k==="pal"){b.innerHTML='<span class="dot"></span>';b.append(o[1]);b.firstChild.style.setProperty("--d1",o[7]);b.firstChild.style.setProperty("--d2",o[8])}
+    else{b.textContent=o[1];if(k==="font"||k==="hf")b.style.fontFamily=o[2]}
+    b.onclick=()=>{D[k]=o[0];try{localStorage.setItem("hbffd",JSON.stringify(D))}catch(e){}applyDs()};
+    row.appendChild(b);
+  });
+  $("ds").append(t,row);
+});
+$("dsBtn").onclick=()=>{const h=$("ds").hidden;$("ds").hidden=!h;$("dsBtn").setAttribute("aria-expanded",h)};
+applyDs();
+
+var ING={
+"Marshmallow Cookies":"Flour, Butter, Sugar, Egg, Chocolate chips, Marshmallows",
+"Spiderweb Brownies":"Brownie mix, Eggs, Butter, White icing",
+"Caramel Apples":"Small apples, Sticks, Caramel candies, Cream, Sprinkles",
+"Oven S’mores":"Cookies, Chocolate, Marshmallows",
+"Ghost Cupcakes":"Muffin mix, Eggs, Butter, White frosting, Chocolate eyes",
+"Monster Donuts":"Donuts, Icing, Sprinkles, Candy eyes",
+"Mini Apple Pockets":"Puff pastry, Apples, Cinnamon, Sugar, Egg",
+"Monster Pizza":"Pizza dough, Tomato sauce, Cheese, Olives, Peppers",
+"Mummy Hot Dogs":"Sausages, Puff pastry, Mustard",
+"Graveyard Cups":"Chocolate pudding, Oreos, Gummy worms, Cookies, Icing pen",
+"Chocolate Spiders":"Chocolate, Licorice laces",
+"Witch Finger Cookies":"Flour, Butter, Sugar, Almonds, Jam",
+"Pumpkin Spice Latte":"Milk, Coffee, Cinnamon, Nutmeg, Vanilla syrup, Cream",
+"Apple Cinnamon Punch":"Apple juice, Cinnamon sticks, Cloves, Oranges",
+"Spiderweb Milkshake":"Vanilla ice cream, Milk, Chocolate sauce",
+"Blood Orange Potion":"Blood oranges, Tonic, Grenadine, Ice cubes",
+"Chai Latte":"Black tea, Cinnamon, Cardamom, Ginger, Milk, Honey",
+"Hot Chocolate Bar":"Milk, Chocolate, Marshmallows, Caramel sauce, Cream",
+"Witch’s Brew":"Soda, Fruit juice, Gummy worms",
+"Vampire Smoothie":"Strawberries, Raspberries, Banana, Yogurt",
+"Mocktail Duel":"Juices, Sparkling water, Ice cubes, Fruit",
+"Golden Milk":"Milk, Turmeric, Cinnamon, Honey",
+"Carve a Pumpkin":"Pumpkin, Tea lights, Carving knife",
+"Paint Pumpkins":"Mini pumpkins, Acrylic paint, Brushes",
+"Halloween Nails":"Black nail polish, Orange nail polish, Toothpicks",
+"Pour Scented Candles":"Wax, Wicks, Jars, Fragrance oil",
+"Pamper Night":"Face mask, Tea, Nail polish",
+"Candy Swap":"Candy (10 kinds)",
+"Popcorn Bar":"Popcorn kernels, Sugar, Cinnamon, Chocolate",
+"Pumpkin Soup":"Pumpkin, Onion, Broth, Coconut milk, Bread",
+"Blanket Fort":"Blankets, Pillows, Fairy lights, Clothespins",
+"Bonfire":"Marshmallows, Twist bread dough, Sticks",
+"Red Light Photos":"Red cellophane, Tape",
+"Friendship Bracelets":"Thread in black, orange, purple",
+"Dark Scavenger Hunt":"Paper notes, Pens, Flashlight"
+};
+var chk=new Set();
+try{(JSON.parse(localStorage.getItem("hbffc")||"[]")).forEach(x=>chk.add(x))}catch(e){}
+function renderShop(){
+  if(!ING||!chk)return;
+  const box=$("shop");box.innerHTML="";
+  const acts=saved.filter(x=>x.k==="akt"&&ING[x.t]);
+  if(!acts.length){box.textContent="Save some activities and their shopping list will show up here.";return}
+  acts.forEach(x=>{
+    const h=document.createElement("p");h.className="lab";h.textContent=x.e+" "+x.t;box.appendChild(h);
+    ING[x.t].split(", ").forEach(it=>{
+      const id=x.t+"|"+it,l=document.createElement("label"),c=document.createElement("input");
+      l.className="ck";c.type="checkbox";c.checked=chk.has(id);
+      c.onchange=()=>{c.checked?chk.add(id):chk.delete(id);try{localStorage.setItem("hbffc",JSON.stringify([...chk]))}catch(e){}};
+      l.append(c," "+it);box.appendChild(l);
+    });
+  });
+}
+$("shopBtn").onclick=()=>{const h=$("shop").hidden;$("shop").hidden=!h;$("shopBtn").setAttribute("aria-expanded",h);if(h)renderShop()};
+
+const DUOS=[["Witch","Black Cat"],["Ghost","Ghostbuster"],["Vampire","Vampire Hunter"],["Wednesday Addams","Enid Sinclair"],["Dr. Frankenstein","The Monster"],["Winifred Sanderson","Mary Sanderson"],["Bonnie","Clyde"],["Hansel","Gretel"],["Red Riding Hood","Wolf"],["Sally","Jack Skellington"],["Morticia","Gomez"],["Zombie Bride","Zombie Groom"],["Angel","Devil"],["Doll","Puppeteer"],["Spider","Fly in the Web"],["Mummy","Archaeologist"],["Skeleton","Bone Doctor"],["Pumpkin","Scarecrow"],["Pirate","Mermaid"],["Alien","Astronaut"],["Killer Clown","Ringmaster"],["Snow White","Evil Queen"],["Sleeping Beauty","Dark Fairy"],["Black Swan","White Swan"],["Moon","Sun"],["Grim Reaper","Gardener"],["Werewolf","Full Moon"],["Sorceress","Apprentice"],["Voodoo Doll","Voodoo Priestess"],["Bat","Cave Explorer"],["Creepy Nun","Exorcist"],["Detective","Wanted Criminal"],["Cowgirl","Zombie Cowgirl"],["Dracula","Bram Stoker"]];
+let lastKo=-1;
+$("rollKo").onclick=()=>{
+  let i;do{i=Math.floor(Math.random()*DUOS.length)}while(i===lastKo);lastKo=i;
+  let d=[...DUOS[i]];if(Math.random()<.5)d.reverse();
+  const o=$("koOut");o.innerHTML="";
+  const c=document.createElement("div");c.className="card act pop";
+  c.innerHTML='<div class="emoji">🎭</div><div><span class="tag">Your duo</span><h3></h3><p></p></div>';
+  c.querySelector("h3").textContent="You: "+d[0];
+  c.querySelector("p").textContent="Your bestie: "+d[1];
+  c.lastChild.appendChild(saveBtn("kos",d[0]+" & "+d[1],"🎭"));
+  o.appendChild(c);
+};
+
+const TRUTH=["What are you most afraid of in the dark?","Which horror movie did you quit halfway because it was too scary?","What was your most embarrassing costume?","Have you ever experienced something unexplainable?","Which monster would you like to be?","How scared of spiders are you, 1 to 10?","Which candy would you never give away?","Did you believe in monsters under the bed as a kid?","What do you like best about me?","What was the best thing we ever did together?","Which scary story frightened you most as a kid?","Would you spend a night alone in a haunted house?","What’s your most embarrassing trick-or-treat memory?","Which song gives you instant goosebumps?","What would you do if you were invisible for a day?","Which witch power would you want?","Have you ever lied to get out of going somewhere?","What’s the most childish thing you still love?","Which of my traits would you like to have?","What’s the biggest lie you’ve ever told?","Who would you prank today, harmlessly?","Which show did you secretly keep watching?","Which celebrity would make the best vampire?","What was your worst nightmare?","Which photo of yourself would you delete?","Which app do you use too much?","What’s your craziest excuse ever?","As a ghost, who would you scare most?","What are you most looking forward to this Halloween?","What would you never change about our friendship?","Which movie makes you cry every time?","Which scary movie was the worst for you?","In a zombie apocalypse: leader, hider, or first victim?","What do you secretly wish for next year?","Which three things would you take to a haunted island?","Which creepy creature would you keep as a pet?"];
+const DARE=["Tell a scary story in 30 seconds.","Talk like a vampire for 1 minute.","Take a photo with your scariest face.","Dance like a zombie for 20 seconds.","Write your name with your other hand and draw a ghost.","Eat two different candies at once.","Imitate a witch stirring a cauldron.","Give the other a compliment in spooky language.","Make cat noises for 10 seconds.","Walk backwards once around the room.","Dress up as a monster in 60 seconds with things in the room.","Recite a poem about pumpkins.","Invent a spell and say it out loud.","Draw a pumpkin with your eyes closed.","Say the next sentence in a ghost voice.","Find three orange things in 30 seconds.","Be a robot until the next round.","Strike your best pose for a spooky photo.","Count down from 20 while cackling like a witch.","Sing a song for 10 seconds using only “boo”.","Give your friend a prophecy for next year.","Turn yourself into a monster with just one pen.","Explain in three sentences how to become a vampire.","Name 5 horror movies in 10 seconds.","Imitate a bat.","Whisper for a whole round.","Describe your friend as a monster.","Give the room a haunted name and invent its story.","Hide something, the other searches with “hot and cold”.","Write yourself a spooky message for next year.","Film a 10-second horror movie trailer.","Swap one piece of clothing with the other until the next round.","Hold a statue pose for 20 seconds without laughing.","Guess a candy blindfolded.","Invent a name and backstory for the creepiest pet.","Do the ghost-finger dance and make the other join."];
+function bag(a){let b=[];return()=>{if(!b.length)b=[...a].sort(()=>Math.random()-.5);return b.pop()}}
+const nextW=bag(TRUTH),nextP=bag(DARE);
+function td(type){
+  const o=$("tdOut");o.innerHTML="";
+  const c=document.createElement("div");c.className="card pop";
+  const t=document.createElement("span");t.className="tag";t.textContent=type;
+  const q=document.createElement("p");q.className="big";q.textContent=type==="Truth"?nextW():nextP();
+  c.append(t,q);o.appendChild(c);
+}
+$("bW").onclick=()=>td("Truth");$("bP").onclick=()=>td("Dare");
+
+const SD=[["Characters",["Vampire","Werewolf","Witch","Ghost","Zombie","Mummy","Skeleton","Pumpkin Head","Creepy Doll","Raven","Black Cat","Scarecrow","Gravedigger","Fog Creature","Clown","Demon","Forest Spirit","Ghost Child","Mad Scientist","Night Watchman"]],
+["Places",["Abandoned Haunted House","Graveyard at Midnight","Cornfield","Dark Forest","Old Schoolhouse","Basement","Foggy Moor","Carnival at Night","Lighthouse","Library","Attic","Castle","Pumpkin Patch","Parking Garage","Hotel Hallway","Misty Lake","Cave","Night Train","Monastery","Sewers"]],
+["Objects",["Rusty Key","Spellbook","Cursed Doll","Flashlight","Old Mirror","Crystal Ball","Lantern","Letter Without Sender","Music Box","Potion","Locket","Candle","Map","Phone Without Signal","Broom","Old Photo","Ring","Shovel","Grandfather Clock","Skull"]]];
+let sc=[];
+function newOf(g,cur){const a=SD[g][1].filter(x=>!cur.includes(x));return a[Math.floor(Math.random()*a.length)]}
+function renderSt(){
+  const o=$("stOut");o.innerHTML="";
+  const hint=document.createElement("p");hint.className="sub";hint.style.marginTop="20px";hint.textContent="Tell a story that includes all 9.";
+  const g=document.createElement("div");g.className="dg";
+  SD.forEach(([name],gi)=>{
+    const col=document.createElement("div");
+    const l=document.createElement("p");l.className="lab";l.textContent=name;col.appendChild(l);
+    sc[gi].forEach((w,wi)=>{
+      const d=document.createElement("div");d.className="die pop";
+      const sp=document.createElement("span");sp.textContent=w;
+      const b=document.createElement("button");b.textContent="↻";b.setAttribute("aria-label",w+" – swap");
+      b.onclick=()=>{sc[gi][wi]=newOf(gi,sc[gi]);renderSt()};
+      d.append(sp,b);col.appendChild(d);
+    });
+    g.appendChild(col);
+  });
+  o.append(hint,g);
+}
+$("rollSt").onclick=()=>{sc=SD.map(([,a],gi)=>{const r=[];while(r.length<3)r.push(newOf(gi,r));return r});renderSt()};
+renderShop();
+</script>
+</body>
+</html>
